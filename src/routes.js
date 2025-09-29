@@ -15,7 +15,7 @@ const validateUser = require('./middlewares/validateUser');
 const autenticarToken = require('./middlewares/auth');
 const isAdmin = require('./middlewares/isAdmin');
 
-routes.put('/user/avatar', autenticarToken, upload.single('avatar'), updateAvatar);
+routes.put('/user/avatar', autenticarToken, updateAvatar);
 
 routes.get('/', (req, res) => {
   res.send('API de Estudo em Grupo funcionando!');
