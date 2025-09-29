@@ -13,7 +13,7 @@ const { updateAvatar } = require('./controllers/controllerUser');
 
 const validateUser = require('./middlewares/validateUser');
 const autenticarToken = require('./middlewares/auth');
-const isAdmin = require('./middlewares/isAdmin'); // ← novo
+const isAdmin = require('./middlewares/isAdmin');
 
 routes.put('/user/avatar', autenticarToken, upload.single('avatar'), updateAvatar);
 
