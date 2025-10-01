@@ -11,6 +11,20 @@ async function getAllSessoes(req, res) {
   }
 }
 
+async function getSessoesByUser(req, res) {
+  try {
+  const userId = req.user.id;
+  
+  const sessoes = await prisma.sessaoEstudo.findMany({
+    where: { usuarioId: userId },
+  });
+  res.json(sessoes);
+  } catch (error) {
+    res.status(500).json({ error: 'Erro ao buscar sessões do usuário' });
+  }
+}
+
+
 async function getSessaoById(req, res) {
   const { id } = req.params;
   try {
@@ -86,4 +100,5 @@ module.exports = {
   createSessaoEstudo,
   updateSessao,
   deleteSessao,
+  getSessoesByUser
 };

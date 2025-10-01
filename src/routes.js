@@ -33,18 +33,19 @@ routes.get('/usuarios', autenticarToken, isAdmin, usuariosController.getAllUsers
 routes.get('/usuarios/:id', autenticarToken, usuariosController.getUserById);
 routes.put('/usuarios/:id', autenticarToken, usuariosController.updateUser);
 routes.delete('/usuarios/:id', autenticarToken, isAdmin, usuariosController.deleteUser); // ← apenas admin
-routes.patch('/usuarios/nome', autenticarToken, usuariosController.updateMyName); // ← atualizar nome do usuário~
-routes.patch('/usuarios/email', autenticarToken, usuariosController.updateMyEmail); // ← atualizar email do usuário
+routes.patch('/usuarios/nome', autenticarToken, usuariosController.updateMyName); 
+routes.patch('/usuarios/email', autenticarToken, usuariosController.updateMyEmail); 
 
 routes.get('/me', autenticarToken, usuariosController.getMe);
 routes.delete('/me', autenticarToken, usuariosController.deleteMe); // ← excluir própria conta
 
 // ROTAS DE MEDALHA
 routes.get('/usuarios/:id/medalhas', autenticarToken, usuariosController.getUserMedalhas);
-routes.post('/medalhas', autenticarToken, isAdmin, medalhasController.createMedalha); // ← apenas admin
+routes.post('/medalhas', autenticarToken, isAdmin, medalhasController.createMedalha); 
 
 
 // ROTAS DE SESSÕES DE ESTUDO
+routes.get('/sessoes/user', autenticarToken, sessaoEstudoController.getSessoesByUser);
 routes.get('/sessoes', autenticarToken, sessaoEstudoController.getAllSessoes);
 routes.get('/sessoes/:id', autenticarToken, sessaoEstudoController.getSessaoById);
 routes.post('/sessoes', autenticarToken, sessaoEstudoController.createSessaoEstudo);
