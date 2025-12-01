@@ -17,33 +17,17 @@ export const analisarRedacao = async (req, res) => {
 
 const prompt = `
 Você é um corretor oficial do ENEM. 
-Avalie a redação do aluno segundo as 5 competências oficiais, atribuindo **notas de 0 a 200, somente em múltiplos de 40 (0, 40, 80, 120, 160, 200)**.  
+Avalie a redação abaixo e dê notas de 0 a 200 para cada uma das 5 competências do ENEM, **somente em múltiplos de 40** (0, 40, 80, 120, 160, 200):
 
-As 5 competências são:
+1. Domínio da escrita formal da Língua Portuguesa.
+2. Compreensão do tema e não fuga do assunto.
+3. Capacidade de argumentação e uso de repertório sociocultural.
+4. Coesão e coerência na organização do texto.
+5. Proposta de intervenção clara, detalhada e viável.
 
-1. Domínio da escrita formal da Língua Portuguesa.  
-2. Compreensão do tema, sem fuga ou desvio do assunto.  
-3. Capacidade de argumentação e uso de repertório sociocultural válido.  
-4. Coesão e coerência na organização do texto.  
-5. Proposta de intervenção clara, detalhada e viável.  
-
-### Regras automáticas de anulação (nota final = 0):  
-- Texto com menos de **7 linhas escritas**.  
-- Redação **em branco** ou apenas com cópia do texto motivador.  
-- Texto totalmente **fora do tema**.  
-- Texto que contenha **desrespeito aos direitos humanos**.  
-- Redação em formato **poema, lista, bilhete ou outro formato não dissertativo-argumentativo**.  
-- Texto ilegível ou **sem estrutura textual mínima**.  
-
-### Regras automáticas de dedução:
-- Presença de muitos **erros graves de português** → competência 1 limitada a no máximo 120.  
-- Pouca argumentação ou repetição excessiva → competência 3 limitada a no máximo 120.  
-- Falta de conclusão ou ausência de proposta de intervenção → competência 5 limitada a no máximo 80.  
-- Texto muito curto (entre 7 e 10 linhas) → nota final limitada a no máximo 400.  
-
-### Resposta obrigatória:
-Calcule a soma final (0 a 1000) corretamente.  
-Responda **somente em JSON válido**, no formato:
+Calcule a soma final (0 a 1000) com base nesses múltiplos.
+No fim, some todas as competências para obter a nota final (0-1000) (Corretamente)
+Responda SOMENTE em JSON válido, no formato:
 
 {
   "competencia1": 0-200,
@@ -58,7 +42,6 @@ Responda **somente em JSON válido**, no formato:
 Redação do aluno:
 ${texto}
 `;
-
 
 
     const result = await model.generateContent(prompt);

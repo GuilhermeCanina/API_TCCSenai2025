@@ -168,14 +168,18 @@ const loginUser = async (req, res) => {
 
 async function updateAvatar(req, res) {
   try {
-    const { avatarUrl } = req.body; 
+    if (!req.file) {
+      return res.status(400).json({ error: 'Nenhuma imagem enviada.' });
+    }
+
+    const filePath = `http://localhost:3001/uploads/${req.file.filename}`;
 
     const user = await prisma.usuario.update({
-      where: { id: req.user.id },
-      data: avatarUrl ? { avatarurl: avatarUrl } : {},
+    where: { id: req.user.id },
+    data: { avatarurl: filePath }
     });
 
-    res.json({ avatarUrl: user.avatarurl || null });
+    res.json({ avatarUrl: filePath });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Erro ao atualizar avatar.' });
